@@ -1,0 +1,82 @@
+i) Character or byte stuffing
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char a[100], b[200], ch;
+    int pos, i, j = 0;
+
+    scanf("%s", a);
+    scanf("%d", &pos);
+    scanf(" %c", &ch);
+
+    strcpy(b, "DLESTX");
+    j = strlen(b);
+
+    for(i = 0; a[i] != '\0'; i++)
+    {
+        if(i == pos - 1)
+        {
+            b[j++] = 'D';
+            b[j++] = 'L';
+            b[j++] = 'E';
+            b[j++] = ch;
+            b[j++] = 'D';
+            b[j++] = 'L';
+            b[j++] = 'E';
+        }
+
+        b[j++] = a[i];
+    }
+
+    b[j] = '\0';
+    strcat(b, "DLEETX");
+
+    printf("Stuffed Frame: %s", b);
+
+    return 0;
+}
+
+ii)	Bit stuffing Program:
+			#include <stdio.h>
+
+int main()
+{
+    char data[50], stuff[100];
+    int i, j = 0, count = 0;
+
+    scanf("%s", data);
+
+    for(i = 0; data[i] != '\0'; i++)
+    {
+        stuff[j++] = data[i];
+
+        if(data[i] == '1')
+        {
+            count++;
+
+            if(count == 5)
+            {
+                if(data[i+1] == '1')
+                {
+                    stuff[j++] = '0';
+                    count = 0;
+                }
+            }
+        }
+        else
+        {
+            count = 0;
+        }
+    }
+
+    stuff[j] = '\0';
+
+    printf("Your stuffing data is: %s", stuff);
+
+    return 0;
+}
+Program Output:
+Enter your data: 010111110101111110101111111
+Your stuffing data is: 01011111010111110101011111011
